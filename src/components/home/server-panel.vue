@@ -3,10 +3,10 @@
         <img class="server-panel__left-image" src="../../assets/os-icons/windows.png">
         <div class="server-panel__right">
             <div class="server-panel__info-bar">
-                        <span class="server-panel__info-item">
-                            <i class="icon-desktop"></i>
-                            <span class="link">test.thoughtworks.com</span>
-                        </span>
+                <span class="server-panel__info-item">
+                    <i class="icon-desktop"></i>
+                    <span class="link">test.thoughtworks.com</span>
+                </span>
                 <span class="server-panel__info-item marker marker-warning">building</span>
                 <span class="server-panel__info-item">
                             <i class="icon-info"></i>
@@ -48,9 +48,9 @@
 </template>
 
 <script>
-export default {
-    name: 'ServerPanel',
-}
+    export default {
+        name: 'ServerPanel',
+    }
 </script>
 
 <style lang="less" scoped>
@@ -112,7 +112,7 @@ export default {
             cursor:pointer;
             padding:5px;
             &:hover{
-                color: @color-blue2;
+                 color: @color-blue2;
             }
         }
     }
