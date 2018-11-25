@@ -86,7 +86,7 @@
         <div></div>
         <!-- 服务器列表 -->
         <div>
-            <server-panel v-for="agent of agentList" :key="agent.id" :agent="agent"></server-panel>
+            <server-panel v-for="(agent,index) in agentList" :key="index" :agent="agent" @data-change="onChange"></server-panel>
         </div>
     </div>
 </template>
@@ -116,6 +116,10 @@
                         this.agentList = resp.data;
                     }
                 });
+            },
+            onChange(){
+                this.agentList = [];
+                this.initAgentList();
             },
         },
         components: {

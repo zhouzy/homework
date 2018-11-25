@@ -69,7 +69,9 @@
 
         methods: {
             handleAddResource(){
-                this.$addAgent(this.$el,this.agentData.id)
+                this.$addAgent(this.$el,this.agentData, () => {
+                    this.$emit("data-change");
+                });
             }
         },
 

@@ -13,7 +13,7 @@ let getAgent = function(id){
 };
 
 let updateAgent = function(id, putData){
-    return api.put(`/agents/${id}`,qs.tringify(putData));
+    return api.put(`/agents/${id}`,qs.stringify(putData));
 };
 
 export default {

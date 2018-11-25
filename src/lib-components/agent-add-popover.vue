@@ -5,20 +5,23 @@
             <span class="tips">Separate multiple resource name with commas</span>
             <input class="popover__input" v-model="resource"/>
             <div class="popover__footer">
-                <button class="btn btn-primary">Add Resource</button>
-                <button class="btn btn-default">Cancel</button>
+                <button class="btn btn-primary" @click="handleAdd" :disabled="isLoading">Add Resource</button>
+                <button class="btn btn-default" @click="handleCancel">Cancel</button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import agentService from "@service/agentService";
+
 export default {
     name: 'AgentAddPopover',
-    props: ["x","y","agentId","visible"],
+    props: ["x","y","agentData","visible"],
     data(){
         return {
-            resource: ""
+            resource: "",
+            isLoading: false
         };
     },
     methods:{
@@ -26,12 +29,39 @@ export default {
             this.resource = "";
         },
 
-        open(){
-            this.visible = true;
+        handleAdd(){
+            if(!this.resource){
+                //提示
+                return;
+            }
+            let resources = this.resource.trim().split(/\s+/);
+
+            resources = this.repeat(this.agentData.resources, resources);
+
+            let newAgent = Object.assign({},this.agentData);
+
+            newAgent.resources = resources;
+
+            this.isLoading = true;
+            agentService.updateAgent(this.agentData.id, newAgent).then(resp => {
+                if(resp.status === 200){
+                    this.$emit("add-success");
+                    this.visible = false;
+                }
+            }).finally(() => {
+                this.isLoading = false;
+            });
+            //做提交
         },
 
-        close(){
+        handleCancel(){
             this.visible = false;
+        },
+
+        //去重
+        repeat(lArr,rArr){
+            let arr = lArr.concat(rArr);
+            return [...new Set(arr)];
         }
     },
     computed: {
