@@ -92,8 +92,8 @@
 </template>
 
 <script>
-    import RotateCard from "@Comps/home/rotate-card.vue";
-    import ServerPanel from "@Comps/home/server-panel.vue";
+    import RotateCard from "@libComps/rotate-card.vue";
+    import ServerPanel from "@comps/agent/server-panel.vue";
     import agentService from "@service/agentService.js";
 
     export default {

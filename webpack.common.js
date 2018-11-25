@@ -25,8 +25,9 @@ module.exports = {
 
             '@service': resolve('src/service'),
 
-            //comp
-            '@Comps': resolve('src/components'),
+            '@comps': resolve('src/components'),
+
+            '@libComps': resolve('src/lib-components'),
         }
     },
     module: {
@@ -84,7 +85,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: '首页',
             filename: 'index.html',
-            template: 'src/pages/index.handlebars',
+            template: 'src/page-templates/index.handlebars',
             showErrors: true,
             inject: false,
             chunks: baseExportChunks.concat(['app'])

@@ -8,18 +8,18 @@ import Router from 'vue-router'
 Vue.use(Router);
 
 //主页
-const HomePage = () => import(/*webpackChunkName: "index"*/'@Comps/home-page.vue');
+const Agent = () => import(/*webpackChunkName: "index"*/'@comps/agent/main.vue');
 
 const routes = [
     {
         path: '/',
-        redirect: '/home'
+        redirect: '/agent'
     },
     {
-        path: '/home',
-        component: HomePage,
-        meta:{ title: '首页'},
-        name: 'home',
+        path: '/agent',
+        component: Agent,
+        meta:{ title: 'agent'},
+        name: 'agent',
     }
 ];
 

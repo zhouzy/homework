@@ -21,7 +21,7 @@
                 </span>
             </div>
             <div class="server-panel__btns">
-                <button class="btn btn-primary btn-icon plus-icon-btn">
+                <button class="btn btn-primary btn-icon plus-icon-btn" @click="handleAddResource">
                     <i class="btn-icon icon-plus"></i>
                 </button>
                 <span class="marker" v-for="(item,index) of agentData.resources" :key="index">
@@ -36,6 +36,11 @@
     </div>
 </template>
 <script>
+    import Vue from "vue";
+    import addAgent from "@libComps/add-agent.js";
+
+    Vue.use(addAgent);
+
     export default {
         name: 'ServerPanel',
         props: ["agent"],
@@ -60,7 +65,15 @@
                     ["centos", require("@/assets/os-icons/cent_os.png")]
                 ]).get(this.agentData.os);
             }
+        },
 
+        methods: {
+            handleAddResource(e){
+                this.$addAgent(e.target,this.agentData.id)
+            }
+        },
+
+        components:{
         }
     }
 </script>

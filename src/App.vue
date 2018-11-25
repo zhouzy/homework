@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import pageHeader from '@Comps/page-header.vue'
-import leftSide from '@Comps/left-side.vue'
+import pageHeader from '@comps/page-header.vue'
+import leftSide from '@comps/left-side.vue'
 
 export default {
   name: 'app',
