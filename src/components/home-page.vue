@@ -57,32 +57,36 @@
 
             <rotate-card>
                 <template slot="front">
-                    <div class="card card__2">
-                        <span class="card__header"></span>
-                        <i class="card__icon"></i>
-                        <span class="card__num"></span>
+                    <div class="card card__3">
+                        <span class="card__header">Idle</span>
+                        <i class="card__icon icon-coffee"></i>
+                        <span class="card__num">5</span>
                     </div>
                 </template>
                 <template slot="back">
-                    <div slot="back" class=""></div>
+                    <div slot="back" class="card number-card">
+                        <div class="number-card__item">
+                            <div class="number-card__label">All</div>
+                            <div class="number-card__num">8</div>
+                        </div>
+                        <div class="number-card__item">
+                            <div class="number-card__label">PHYSICAL</div>
+                            <div class="number-card__num">4</div>
+                        </div>
+                        <div class="number-card__item">
+                            <div class="number-card__label">VIRTUAL</div>
+                            <div class="number-card__num">4</div>
+                        </div>
+                    </div>
                 </template>
             </rotate-card>
+
         </div>
         <!-- 工具栏 -->
         <div></div>
         <!-- 服务器列表 -->
         <div>
-            <server-panel></server-panel>
-            <server-panel></server-panel>
-            <server-panel></server-panel>
-            <server-panel></server-panel>
-            <server-panel></server-panel>
-            <server-panel></server-panel>
-            <server-panel></server-panel>
-            <server-panel></server-panel>
-            <server-panel></server-panel>
-            <server-panel></server-panel>
-            <server-panel></server-panel>
+            <server-panel v-for="agent of agentList" :key="agent.id" :agent="agent"></server-panel>
         </div>
     </div>
 </template>
@@ -90,9 +94,29 @@
 <script>
     import RotateCard from "@Comps/home/rotate-card.vue";
     import ServerPanel from "@Comps/home/server-panel.vue";
+    import agentService from "@service/agentService.js";
+
     export default {
         name: 'HomeApp',
-        props: {
+
+        mounted(){
+            this.initAgentList();
+        },
+
+        data(){
+            return {
+                agentList: [],
+            };
+        },
+
+        methods: {
+            initAgentList(){
+                agentService.getAgents().then(resp => {
+                    if(resp.status === 200){
+                        this.agentList = resp.data;
+                    }
+                });
+            },
         },
         components: {
             RotateCard,
@@ -167,6 +191,6 @@
         background:@color-green;
     }
     .card__3{
-        background:@color-green;
+        background:@color-blue;
     }
 </style>

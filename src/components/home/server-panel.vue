@@ -1,44 +1,33 @@
 <template>
     <div class="server-panel">
-        <img class="server-panel__left-image" src="../../assets/os-icons/windows.png">
+        <img class="server-panel__left-image" :src="osImg"/>
         <div class="server-panel__right">
             <div class="server-panel__info-bar">
                 <span class="server-panel__info-item">
                     <i class="icon-desktop"></i>
-                    <span class="link">test.thoughtworks.com</span>
+                    <span class="link">{{agentData.name}}</span>
                 </span>
-                <span class="server-panel__info-item marker marker-warning">building</span>
+                <span class="server-panel__info-item marker marker-warning"
+                      :class="{'marker-warning': agentData.status === 'building', 'marker-success': agentData.status === 'idle'}">
+                    {{agentData.status}}
+                </span>
                 <span class="server-panel__info-item">
-                            <i class="icon-info"></i>
-                            <span>192.168.1.204</span>
-                        </span>
+                    <i class="icon-info"></i>
+                    <span>{{agentData.ip}}</span>
+                </span>
                 <span class="server-panel__info-item">
-                            <i class="icon-folder"></i>
-                            <span>/var/lib/cursor-lib</span>
-                        </span>
+                    <i class="icon-folder"></i>
+                    <span>{{agentData.location}}</span>
+                </span>
             </div>
             <div class="server-panel__btns">
                 <button class="btn btn-primary btn-icon plus-icon-btn">
                     <i class="btn-icon icon-plus"></i>
                 </button>
-
-                <span class="marker">
-                            <span class="@color-blue2">Firefox</span>
-                            <i class="icon-trash"></i>
-                        </span>
-                <span class="marker">
-                            <span class="@color-blue2">Firefox</span>
-                            <i class="icon-trash"></i>
-                        </span>
-                <span class="marker">
-                            <span class="@color-blue2">Firefox</span>
-                            <i class="icon-trash"></i>
-                        </span>
-                <span class="marker">
-                            <span class="@color-blue2">Firefox</span>
-                            <i class="icon-trash"></i>
-                        </span>
-
+                <span class="marker" v-for="(item,index) of agentData.resources" :key="index">
+                    <span>{{item}}</span>
+                    <i class="icon-trash"></i>
+                </span>
                 <button class="btn btn-primary btn-deny">
                     <i class="icon-deny"></i> Deny
                 </button>
@@ -46,10 +35,33 @@
         </div>
     </div>
 </template>
-
 <script>
     export default {
         name: 'ServerPanel',
+        props: ["agent"],
+        created(){
+            this.agentData = Object.assign({},this.agent);
+        },
+        data(){
+            return {
+                agentData: null
+            }
+        },
+        computed: {
+            osImg(){
+                if(!this.agentData){
+                    return "";
+                }
+                return new Map([
+                    ["windows", require("@/assets/os-icons/windows.png")],
+                    ["ubuntu", require("@/assets/os-icons/ubuntu.png")],
+                    ["debian", require("@/assets/os-icons/debin.png")],
+                    ["suse", require("@/assets/os-icons/suse.png")],
+                    ["centos", require("@/assets/os-icons/cent_os.png")]
+                ]).get(this.agentData.os);
+            }
+
+        }
     }
 </script>
 

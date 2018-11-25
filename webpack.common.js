@@ -19,12 +19,11 @@ module.exports = {
 
             '@': resolve('src'),
             '@assets': resolve('src/assets'),
-            // 公用less
-            '@libLess': resolve('src/less'),
-            '@libJs': resolve('src/lib-js'),
 
-            '@Service': resolve('src/service'),
-            '@libComponents': resolve('src/lib-components'),
+            // 公用less
+            '@libLess': resolve('src/lib-less'),
+
+            '@service': resolve('src/service'),
 
             //comp
             '@Comps': resolve('src/components'),
