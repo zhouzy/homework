@@ -68,8 +68,8 @@
         },
 
         methods: {
-            handleAddResource(e){
-                this.$addAgent(e.target,this.agentData.id)
+            handleAddResource(){
+                this.$addAgent(this.$el,this.agentData.id)
             }
         },
 

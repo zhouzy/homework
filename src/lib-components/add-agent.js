@@ -6,37 +6,35 @@ import AgentAddPopoverC from "./agent-add-popover.vue";
 
 let AddAgent = {};
 
+let getXY = function(target){
+    let rect = target.getBoundingClientRect();
+    let w = target.clientWidth;
+    let h = target.clientHeight;
+
+    let x = rect.x + Math.floor(w/2);
+    let y = rect.y + h;
+
+    return [x,y];
+};
+
 AddAgent.install = function(Vue, option){
     let Comp = Vue.extend(AgentAddPopoverC);
     let $comp;
 
     Vue.prototype.$addAgent = function(target,id){
-        let rect = target.getBoundingClientRect();
-        let w = target.clientWidth;
-        let h = target.clientHeight;
-
-        let x = rect.x + Math.floor(w/2);
-        let y = rect.y + h;
-
-        if(!$comp){
-            let $el = document.createElement("div");
-
-            $comp = new Comp({
-                propsData: {
-                    x: rect.left,
-                    y: rect.top,
-                    id: id,
-
-                }
-            }).$mount($el);
-            document.body.appendChild($comp.$el);
-            $comp.open();
+        if($comp){
+            $comp.$props.visible = false;
+            $comp = undefined;
         }
-        else{
-            $comp.$props.x = x;
-            $comp.$props.y = y;
-            $comp.open();
-        }
+        let $el = document.createElement("div");
+        $comp = new Comp({
+            propsData: {
+                id: id,
+                visible: true
+            }
+        }).$mount($el);
+
+        target.appendChild($comp.$el);
     }
 };
 

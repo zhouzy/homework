@@ -1,5 +1,5 @@
 <template>
-    <div class="popover" v-show="visible" :style="style">
+    <div class="popover" v-if="visible">
         <div class="popover__content">
             <i class="popover__close-btn"></i>
             <span class="tips">Separate multiple resource name with commas</span>
@@ -15,10 +15,9 @@
 <script>
 export default {
     name: 'AgentAddPopover',
-    props: ["x","y","agentId"],
+    props: ["x","y","agentId","visible"],
     data(){
         return {
-            visible: false,
             resource: ""
         };
     },
@@ -36,12 +35,7 @@ export default {
         }
     },
     computed: {
-        style() {
-            return {
-                left: (this.x - 15) + "px",
-                top: this.y + 35 + "px"
-            }
-        }
+
     }
 }
 </script>
@@ -50,12 +44,16 @@ export default {
     @import "~@/lib-less/common.less";
     @import "~@/lib-less/base-defined.less";
     .popover{
-        position: fixed;
-        top:80px;
+        position: absolute;
+        bottom:0;
+        left: 109px;
         width:570px;
         box-shadow: 0 3px 5px -4px rgba(0,0,0,0.3);
         background:#fff;
         border:1px solid @color-blue;
+        transform: translateY(100%);
+        z-index:2001;
+
         &:before{
             content: " ";
             position:absolute;
