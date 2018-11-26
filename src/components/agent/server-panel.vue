@@ -92,9 +92,8 @@
             },
 
             handleDeleteResource(i){
-                console.log(this.agentData.resources);
                 this.agentData.resources.splice(i,1);
-                console.log(this.agentData.resources);
+
                 agentService.updateAgent(this.agentData.id, this.agentData).then(resp => {
                     if(resp.status === 200){
                         this.$emit("data-change");
@@ -102,9 +101,6 @@
                     }
                 });
             }
-        },
-
-        components:{
         }
     }
 </script>
@@ -181,5 +177,6 @@
         position: absolute;
         right:0;
         margin-right:0;
+        bottom:15px;
     }
 </style>

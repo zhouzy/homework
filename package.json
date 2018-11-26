@@ -11,6 +11,7 @@
   "author": "zhouzy",
   "license": "ISC",
   "dependencies": {
+    "@babel/polyfill": "^7.0.0",
     "amfe-flexible": "^2.2.1",
     "axios": "0.15.3",
     "es6-promise": "4.1.0",
@@ -27,6 +28,7 @@
     "async-validator": "^1.10.0",
     "babel-core": "6.24.1",
     "babel-loader": "6.4.1",
+    "babel-plugin-es6-promise": "^1.1.1",
     "babel-plugin-import": "^1.10.0",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-runtime": "6.23.0",

@@ -36,6 +36,7 @@
         margin:0;
         padding:0;
         font-size:14px;
+        padding-top:25px;
     }
     .side-menu__item{
         color:rgba(255,255,255,0.9);

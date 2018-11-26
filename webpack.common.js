@@ -9,7 +9,7 @@ function resolve (dir) {
 
 module.exports = {
     entry: {
-        vendor: ['vue', 'vuex', 'vue-router', 'axios', 'lodash'],
+        vendor: ["@babel/polyfill",'vue', 'vuex', 'vue-router', 'axios', 'lodash'],
         'app': '@/main.js',
     },
     resolve: {
@@ -48,7 +48,7 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /\.(eot|svg|ttf|TTF|png)(\?\S*)?$/,
+                test: /\.(eot|svg|ttf|TTF|png|jpg)(\?\S*)?$/,
                 loader: 'file-loader'
             },
             {

@@ -2,8 +2,7 @@
     <header class="header-wrapper">
         <img src="../assets/logo/logo.svg" class="header-wrapper__logo"/>
         <div class="header-wrapper__avatar-box">
-            <img src="../assets/logo/logo.svg" class="avatar-box__avatar"/>
-            <i class="avatar-box__icon"></i>
+            <img src="../assets/logo/avatar.jpg" class="avatar-box__avatar"/>
         </div>
     </header>
 </template>
@@ -11,8 +10,7 @@
     export default{
         name: "header",
         data(){
-            return {
-            }
+            return {}
         },
     }
 </script>

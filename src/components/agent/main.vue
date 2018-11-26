@@ -2,7 +2,7 @@
     <div id="home">
         <!-- 统计 -->
         <div class="rotate-card-list">
-            <rotate-card>
+            <rotate-card class="card-wrapper">
                 <template slot="front">
                     <div class="card card__1">
                         <span class="card__header">Building</span>
@@ -15,21 +15,21 @@
                     <div slot="back" class="card number-card">
                         <div class="number-card__item">
                             <div class="number-card__label">All</div>
-                            <div class="number-card__num">8</div>
+                            <div class="number-card__num">3</div>
                         </div>
                         <div class="number-card__item">
                             <div class="number-card__label">PHYSICAL</div>
-                            <div class="number-card__num">4</div>
+                            <div class="number-card__num">2</div>
                         </div>
                         <div class="number-card__item">
                             <div class="number-card__label">VIRTUAL</div>
-                            <div class="number-card__num">4</div>
+                            <div class="number-card__num">1</div>
                         </div>
                     </div>
                 </template>
             </rotate-card>
 
-            <rotate-card>
+            <rotate-card class="card-wrapper">
                 <template slot="front">
                     <div class="card card__2">
                         <span class="card__header">Idle</span>
@@ -41,45 +41,36 @@
                     <div slot="back" class="card number-card">
                         <div class="number-card__item">
                             <div class="number-card__label">All</div>
-                            <div class="number-card__num">8</div>
+                            <div class="number-card__num">5</div>
                         </div>
                         <div class="number-card__item">
                             <div class="number-card__label">PHYSICAL</div>
-                            <div class="number-card__num">4</div>
+                            <div class="number-card__num">2</div>
                         </div>
                         <div class="number-card__item">
                             <div class="number-card__label">VIRTUAL</div>
-                            <div class="number-card__num">4</div>
+                            <div class="number-card__num">3</div>
                         </div>
                     </div>
                 </template>
             </rotate-card>
 
-            <rotate-card>
-                <template slot="front">
-                    <div class="card card__3">
-                        <span class="card__header">Idle</span>
-                        <i class="card__icon icon-coffee"></i>
-                        <span class="card__num">5</span>
+            <div class="card-wrapper">
+                <div class="card number-card">
+                    <div class="number-card__item">
+                        <div class="number-card__label">All</div>
+                        <div class="number-card__num">8</div>
                     </div>
-                </template>
-                <template slot="back">
-                    <div slot="back" class="card number-card">
-                        <div class="number-card__item">
-                            <div class="number-card__label">All</div>
-                            <div class="number-card__num">8</div>
-                        </div>
-                        <div class="number-card__item">
-                            <div class="number-card__label">PHYSICAL</div>
-                            <div class="number-card__num">4</div>
-                        </div>
-                        <div class="number-card__item">
-                            <div class="number-card__label">VIRTUAL</div>
-                            <div class="number-card__num">4</div>
-                        </div>
+                    <div class="number-card__item">
+                        <div class="number-card__label">PHYSICAL</div>
+                        <div class="number-card__num">4</div>
                     </div>
-                </template>
-            </rotate-card>
+                    <div class="number-card__item">
+                        <div class="number-card__label">VIRTUAL</div>
+                        <div class="number-card__num">4</div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- 工具栏 -->
@@ -207,6 +198,12 @@
         justify-content: space-between;
         color:@color-gray4;
     }
+
+    .card-wrapper{
+        width:288px;
+        height:144px;
+    }
+
     .number-card__item{
         width:33%;
     }
@@ -293,4 +290,5 @@
             color: @color-blue;
         }
     }
+
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="popover" v-if="visible">
+    <div class="popover" v-if="isOpen">
         <div class="popover__content">
             <i class="popover__close-btn"></i>
             <span class="tips">Separate multiple resource name with commas</span>
@@ -17,11 +17,18 @@ import agentService from "@service/agentService";
 
 export default {
     name: 'AgentAddPopover',
+
     props: ["x","y","agentData","visible"],
+
+    created(){
+        this.isOpen = this.visible;
+    },
+
     data(){
         return {
             resource: "",
-            isLoading: false
+            isLoading: false,
+            isOpen: false
         };
     },
     methods:{
@@ -34,7 +41,7 @@ export default {
                 //提示
                 return;
             }
-            let resources = this.resource.trim().split(/\s+/);
+            let resources = this.resource.trim().split(/[\s,]+/);
 
             resources = this.repeat(this.agentData.resources, resources);
 
@@ -46,26 +53,26 @@ export default {
             agentService.updateAgent(this.agentData.id, newAgent).then(resp => {
                 if(resp.status === 200){
                     this.$emit("add-success");
-                    this.visible = false;
+                    this.close();
                 }
             }).finally(() => {
                 this.isLoading = false;
             });
-            //做提交
         },
 
         handleCancel(){
-            this.visible = false;
+            this.close();
         },
 
         //去重
         repeat(lArr,rArr){
             let arr = lArr.concat(rArr);
             return [...new Set(arr)];
-        }
-    },
-    computed: {
+        },
 
+        close(){
+            this.isOpen = false;
+        }
     }
 }
 </script>

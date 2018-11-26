@@ -19,8 +19,6 @@ export default {
     .rotate-card{
         transition: transform 2s;
         transform-style: preserve-3d;
-        width:288px;
-        height:144px;
         position: relative;
     }
     .rotate-card:hover{
