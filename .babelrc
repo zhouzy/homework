@@ -3,6 +3,6 @@
     "es2015",
     "stage-3"
   ],
-  "plugins": ["transform-runtime","babel-plugin-syntax-dynamic-import","es6-promise"],
+  "plugins": ["transform-runtime","babel-plugin-syntax-dynamic-import"],
   "comments": false
 }

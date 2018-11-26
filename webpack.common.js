@@ -16,18 +16,12 @@ module.exports = {
         extensions: ['.js', '.vue', '.json'],
         alias: {
             'vue$': 'vue/dist/vue.js',
-
             '@': resolve('src'),
             '@assets': resolve('src/assets'),
-
-            // 公用less
             '@libLess': resolve('src/lib-less'),
-
             '@service': resolve('src/service'),
-
             '@comps': resolve('src/components'),
-
-            '@libComps': resolve('src/lib-components'),
+            '@libComps': resolve('src/lib-components')
         }
     },
     module: {
@@ -37,9 +31,9 @@ module.exports = {
                 loader: 'vue-loader',
                 options: {
                     loaders: {
-                        'less': 'vue-style-loader!css-loader!less-loader',
-                        'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax',
-                    }
+                        'less': 'vue-style-loader!css-loader!postcss-loader!less-loader'
+                    },
+                    postcss: [require('autoprefixer')()],
                 }
             },
             {
@@ -62,6 +56,14 @@ module.exports = {
             {
                 test: /\.handlebars$/,
                 loader: "handlebars-loader"
+            },
+            {
+                test: /\.css$/,
+                use: ["style-loader", "postcss-loader", "css-loader"]
+            },
+            {
+                test: /\.less$/,
+                use: ["style-loader", "postcss-loader", "css-loader", "less-loader"]
             }
         ]
     },
@@ -70,20 +72,19 @@ module.exports = {
             _: 'lodash',
             qs: 'querystring'
         }),
-        // vendor为公用bundle的名称
-        // mainfest用来提取运行时代码，来实现vendor的缓存
+
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             minChunks: Infinity
         }),
-        // extract webpack runtime and module manifest to its own file in order to
-        // prevent vendor hash from being updated whenever app bundle is updated
+
         new webpack.optimize.CommonsChunkPlugin({
             name: 'manifest',
             chunks: ['vendor']
         }),
+
         new HtmlWebpackPlugin({
-            title: '首页',
+            title: 'Agent',
             filename: 'index.html',
             template: 'src/page-templates/index.handlebars',
             showErrors: true,
