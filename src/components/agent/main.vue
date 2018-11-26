@@ -80,13 +80,31 @@
                     </div>
                 </template>
             </rotate-card>
-
         </div>
+
         <!-- 工具栏 -->
-        <div></div>
+        <div class="nav-box">
+            <div class="nav-box__left">
+                <ul class="nav">
+                    <li class="nav__item" :class="{'nav__item__active': filters.type === ''}" @click="filters.type = ''">All</li>
+                    <li class="nav__item" :class="{'nav__item__active': filters.type === 'physical'}" @click="filters.type = 'physical'">Physical</li>
+                    <li class="nav__item" :class="{'nav__item__active': filters.type === 'virtual'}" @click="filters.type = 'virtual'">Virtual</li>
+                </ul>
+
+                <div class="search-box">
+                    <i class="icon-search"></i>
+                    <input class="search-box__input"/>
+                </div>
+            </div>
+            <div class="nav-box__btns">
+                <i class="icon-th-card"></i>
+                <i class="icon-th-list active"></i>
+            </div>
+        </div>
+
         <!-- 服务器列表 -->
         <div>
-            <server-panel v-for="(agent,index) in agentList" :key="index" :agent="agent" @data-change="onChange"></server-panel>
+            <server-panel v-for="agent in agentList" :key="agent.id" :agent="agent" @data-change="onChange"></server-panel>
         </div>
     </div>
 </template>
@@ -105,7 +123,10 @@
 
         data(){
             return {
-                agentList: [],
+                originList: [],
+                filters: {
+                    type: ""
+                }
             };
         },
 
@@ -113,14 +134,26 @@
             initAgentList(){
                 agentService.getAgents().then(resp => {
                     if(resp.status === 200){
-                        this.agentList = resp.data;
+                        this.originList = resp.data;
                     }
                 });
             },
             onChange(){
-                this.agentList = [];
+                this.originList = [];
                 this.initAgentList();
             },
+        },
+
+        computed: {
+            agentList(){
+                if(!this.originList){
+                    return [];
+                }
+                if(!this.filters.type){
+                    return this.originList;
+                }
+                return this.originList.filter(i => i.type === this.filters.type);
+            }
         },
         components: {
             RotateCard,
@@ -196,5 +229,68 @@
     }
     .card__3{
         background:@color-blue;
+    }
+
+    .nav-box{
+        background:#fff;
+        margin:15px 0;
+        display:flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+    }
+    .nav{
+        display:inline-block;
+        margin:0;
+        padding:0;
+        font-size:0;
+    }
+    .nav__item{
+        font-size:14px;
+        display:inline-block;
+        width:96px;
+        text-align:center;
+        height:50px;
+        line-height:50px;
+        border-bottom: 3px solid transparent;
+        border-right:1px solid @color-gray2;
+        cursor:pointer;
+    }
+    .nav__item__active{
+        border-bottom-color:@color-blue;
+    }
+    .search-box{
+        display:inline-block;
+        position: relative;
+        margin-left:15px;
+        i{
+            position: absolute;
+            font-size:16px;
+            left:5px;
+            top:50%;
+            transform: translateY(-50%);
+        }
+    }
+
+    .search-box__input{
+        display:inline-block;
+        height:30px;
+        outline: none;
+        padding-left:26px;
+    }
+
+    .nav-box{
+        height:50px;
+        line-height:50px;
+    }
+
+    .nav-box__btns i{
+        display:inline-block;
+        font-size:20px;
+        margin-right:20px;
+        color:@color-gray3;
+        cursor: pointer;
+        &.active{
+            color: @color-blue;
+        }
     }
 </style>

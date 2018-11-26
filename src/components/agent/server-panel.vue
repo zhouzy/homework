@@ -24,11 +24,11 @@
                 <button class="btn btn-primary btn-icon plus-icon-btn" @click="handleAddResource">
                     <i class="btn-icon icon-plus"></i>
                 </button>
-                <span class="marker" v-for="(item,index) of agentData.resources" :key="index">
+                <span class="marker" v-for="(item,index) of agentData.resources" :key="item">
                     <span>{{item}}</span>
-                    <i class="icon-trash"></i>
+                    <i class="icon-trash" @click="handleDeleteResource(index)"></i>
                 </span>
-                <button class="btn btn-primary btn-deny">
+                <button class="btn btn-primary btn-deny" v-if="agentData.status === 'building'" @click="handleDeny">
                     <i class="icon-deny"></i> Deny
                 </button>
             </div>
@@ -38,6 +38,7 @@
 <script>
     import Vue from "vue";
     import addAgent from "@libComps/add-agent.js";
+    import agentService from "@service/agentService.js";
 
     Vue.use(addAgent);
 
@@ -46,6 +47,9 @@
         props: ["agent"],
         created(){
             this.agentData = Object.assign({},this.agent);
+            if(this.agentData.resources && !Array.isArray(this.agentData.resources)){
+                this.agentData.resources = [this.agentData.resources];
+            }
         },
         data(){
             return {
@@ -71,6 +75,31 @@
             handleAddResource(){
                 this.$addAgent(this.$el,this.agentData, () => {
                     this.$emit("data-change");
+                });
+            },
+
+            handleDeny(){
+                let newAgent = Object.assign({},this.agentData);
+
+                newAgent.status = "idle";
+
+                agentService.updateAgent(this.agentData.id, newAgent).then(resp => {
+                    if(resp.status === 200){
+                        this.$emit("data-change");
+                        this.visible = false;
+                    }
+                });
+            },
+
+            handleDeleteResource(i){
+                console.log(this.agentData.resources);
+                this.agentData.resources.splice(i,1);
+                console.log(this.agentData.resources);
+                agentService.updateAgent(this.agentData.id, this.agentData).then(resp => {
+                    if(resp.status === 200){
+                        this.$emit("data-change");
+                        this.visible = false;
+                    }
                 });
             }
         },

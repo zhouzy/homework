@@ -24,6 +24,7 @@ export default {
 </script>
 
 <style lang="less">
+    @import "~@/lib-less/normalize.css";
     @import "~@/assets/font-icons/fonts.css";
     html,body{
         margin:0;
