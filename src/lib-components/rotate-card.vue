@@ -1,5 +1,8 @@
 <template>
-    <div class="rotate-card">
+    <div class="rotate-card" :class="isEnter ? (isIE ? 'rotate-card__ie-op': 'rotate-card__rotate') : ''"
+         @mouseenter="handleMouseEnter"
+         @mouseleave="handleMouseLeave">
+
         <div class="rotate-card__front">
             <slot name="front"></slot>
         </div>
@@ -12,6 +15,26 @@
 <script>
 export default {
     name: 'RotateCard',
+
+    data(){
+        return {
+            isEnter: false,
+            isIE: false,
+        }
+    },
+
+    mounted(){
+        this.isIE = !!window.ActiveXObject || "ActiveXObject" in window;
+    },
+
+    methods: {
+        handleMouseEnter(){
+            this.isEnter = true;
+        },
+        handleMouseLeave(){
+            this.isEnter = false
+        }
+    }
 }
 </script>
 
@@ -23,9 +46,25 @@ export default {
         height:144px;
         position: relative;
     }
-    .rotate-card:hover{
+
+    .rotate-card__rotate{
         transform: rotateY(180deg);
     }
+
+    .rotate-card__ie-op{
+        .rotate-card__front{
+            z-index:2000;
+            backface-visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .rotate-card__back{
+            z-index:1999;
+            transform: none;
+            backface-visibility: hidden;
+        }
+    }
+
     .rotate-card__front,.rotate-card__back{
         position: absolute;
         top:0;
