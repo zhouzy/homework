@@ -13,11 +13,18 @@ module.exports = merge(common, {
         // 文件输出目录
         path: resolve('./app'),
         // 资源加载路径
-        publicPath: '/homework/app/',
+        publicPath: '/app/',
         // 输出的bundle文件名
         filename: '[name].js',
         // 输出的chunk文件名
         chunkFilename: '[name].js'
+    },
+    devServer: {
+        contentBase: resolve("./app"),
+        inline:true,
+        publicPath: "/app",
+        open: true,
+        index: '/index.html'
     },
     plugins: [
         // 在每次构建前清理文件夹

@@ -286,6 +286,7 @@
         margin-right:20px;
         color:@color-gray3;
         cursor: pointer;
+        vertical-align:middle;
         &.active{
             color: @color-blue;
         }

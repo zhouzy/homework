@@ -5,7 +5,7 @@
               <i class="icon-dashboard side-menu__icon"></i>
               <span class="side-menu__name">DASHBOARD</span>
           </li>
-          <li class="side-menu__item">
+          <li class="side-menu__item" :class="{'side-menu__item__active': defaultActive === '/agent'}">
               <i class="icon-sitemap side-menu__icon"></i>
               <span class="side-menu__name">AGENT</span>
           </li>
@@ -29,14 +29,30 @@
       </div>
   </div>
 </template>
-<script></script>
+<script>
+    export default{
+        name: "leftSide",
+        created(){
+            this.$router.onReady(() => {
+                this.defaultActive = this.$route.path;
+            });
+        },
+        data(){
+            return {
+                defaultActive: ""
+            }
+        }
+    }
+</script>
 <style lang="less" scoped>
+    .left-side{
+        min-height:500px;
+    }
     .side-menu{
         list-style:none;
         margin:0;
-        padding:0;
+        padding:25px 0;
         font-size:14px;
-        padding-top:25px;
     }
     .side-menu__item{
         color:rgba(255,255,255,0.9);
@@ -48,7 +64,7 @@
         text-align:left;
         cursor:pointer;
 
-        &:hover,&.side-menu__item_active{
+        &:hover, &.side-menu__item__active{
             background:rgba(240,240,240,0.1);
             color:#00B4CF;
         }
@@ -56,15 +72,14 @@
     .side-menu__icon{
         margin-right:10px;
     }
-    .side-menu__name{
-    }
+
     .left-side__history{
-        height:200px;
+        height:300px;
         position: absolute;
         left:0;
         right:0;
         bottom:0;
-        padding:0 10px;
+        padding:15px 10px;
     }
     .left-side__history-h{
         color:#CCC;

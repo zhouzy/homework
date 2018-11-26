@@ -25,7 +25,7 @@
     .header-wrapper__avatar-box{
         position:absolute;
         height:40px;
-        top:10px;
+        top:15px;
         right:0;
     }
     .header-wrapper__logo{

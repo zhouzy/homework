@@ -29,7 +29,6 @@ export default {
     html,body{
         margin:0;
         padding:0;
-        height:100%;
     }
     *{
         box-sizing: border-box;
@@ -43,7 +42,7 @@ export default {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #2c3e50;
+    color: #2C3E50;
     height:100%;
     padding-top: 70px;
     font-size:14px;
@@ -55,6 +54,8 @@ export default {
     height:70px;
     width:100%;
     background:#fff;
+    box-shadow: 0 3px 5px -4px rgba(0,0,0,0.3);
+    z-index:1000;
 }
 .page-body{
     width:1200px;
@@ -64,19 +65,16 @@ export default {
 }
 
 .page-body__left-side{
-    position: absolute;
-    left:0;
-    top:0;
+    position: fixed;
+    top:70px;
     bottom:0;
     width:270px;
+    min-height:100%;
     background:#2D4054;
+    z-index:1000;
 }
 .page-body__content{
-    position: absolute;
-    left:300px;
-    right:0;
-    top:15px;
-    bottom:0;
-    overflow:auto;
+    margin-left:300px;
+    margin-top:15px;
 }
 </style>

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=dev webpack --watch --profile --progress --colors --display-error-details --config webpack.dev.js",
-    "test": "cross-env NODE_ENV=test webpack --optimize-minimize --progress --hide-modules --config webpack.test.js",
+    "start": "json-server --watch mock-server/db.json --port 3001 & webpack-dev-server --config webpack.dev.js",
     "prod": "cross-env NODE_ENV=prod webpack --optimize-minimize --progress --hide-modules --config webpack.prod.js"
   },
   "author": "zhouzy",
@@ -17,7 +17,8 @@
     "promise.prototype.finally": "2.0.1",
     "vue": "2.5.2",
     "vue-router": "2.7.0",
-    "vuex": "2.3.1"
+    "vuex": "2.3.1",
+    "webpack-dev-server": "^2.4.5"
   },
   "devDependencies": {
     "async-validator": "^1.10.0",
@@ -32,6 +33,7 @@
     "clean-webpack-plugin": "^0.1.17",
     "cross-env": "3.2.4",
     "css-loader": "0.25.0",
+    "express": "^4.16.4",
     "file-loader": "0.9.0",
     "handlebars": "4.0.11",
     "handlebars-loader": "1.6.0",
@@ -45,7 +47,9 @@
     "vue-loader": "13.3.0",
     "vue-template-compiler": "2.5.2",
     "webpack": "2.6.1",
+    "webpack-dev-middleware": "^3.4.0",
     "webpack-dev-server": "2.4.5",
-    "webpack-merge": "^4.1.1"
+    "webpack-merge": "^4.1.1",
+    "json-server": "^0.14.0"
   }
 }
