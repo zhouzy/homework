@@ -2,10 +2,22 @@
 
 ## 项目构建
 
+### 安装依赖
 ```
 npm install
-npm run start
 ```
+### 启动 Mock Server
+
+```
+npm run mock-server
+```
+
+### 启动 Webpack Server
+
+```
+npm run server
+```
+
 请访问[agent](http://localhost:8080/app/index.html)
 
 ## 目录结构

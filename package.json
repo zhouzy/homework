@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=dev webpack --watch --profile --progress --colors --display-error-details --config webpack.dev.js",
     "prod": "cross-env NODE_ENV=prod webpack --optimize-minimize --progress --hide-modules --config webpack.prod.js",
+    "mock-server": "json-server --watch mock/db.json --port 3001",
+    "server": "webpack-dev-server --config webpack.dev.js",
     "start": "json-server --watch mock/db.json --port 3001 & webpack-dev-server --config webpack.dev.js"
   },
   "author": "zhouzy",
